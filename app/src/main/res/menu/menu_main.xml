@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/yourProfileFragment"
+            android:title="@string/yourProfileDrawerMessageMain"
+            android:icon="@drawable/icon_my_profile" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/createGroupFragment"
+            android:icon="@drawable/icon_create_group"
+            android:title="@string/createGroupDrawerMessageMain" />
+        <item
+            android:id="@+id/newMessageFragment"
+            android:icon="@drawable/icon_my_profile"
+            android:title="@string/contactsDrawerMessageMain" />
+        <item
+            android:id="@+id/electsFragment"
+            android:icon="@drawable/icon_elects"
+            android:title="@string/electsDrawerMessageMain" />
+        <item
+            android:id="@+id/settingsFragment"
+            android:icon="@drawable/icon_settings"
+            android:title="@string/settingsDrawerMessageMain" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/inviteFrensFragment"
+            android:icon="@drawable/icon_invite_frens"
+            android:title="@string/inviteFrensDrawerMessageMain" />
+    </group>
+
+</menu>

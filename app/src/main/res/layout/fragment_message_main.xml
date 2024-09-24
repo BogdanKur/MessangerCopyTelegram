@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grafitnoCherni">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MessageMainFragment">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:background="@color/grafitnoGray">
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:actionBarSize"
+                    app:titleTextColor="@color/grafitnoGray"
+                    android:id="@+id/toolbar"
+                    android:layout_marginStart="25dp"
+                    app:popupTheme="@color/grafitnoGray"/>
+                <Button
+                    android:id="@+id/btnDrawerOpen"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center|start"
+                    android:layout_marginStart="10dp"
+                    android:background="@android:color/transparent"
+                    android:drawableLeft="@drawable/icon_drawer" />
+            </FrameLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTabsFolders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="horizontal"/>
+            </HorizontalScrollView>
+            <FrameLayout
+                android:background="@drawable/rv_tabs_of_messages_drawable"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <Button
+                    android:text="Избранное"
+                    android:id="@+id/btnRvTabOfMessangesOpenMessageELECT"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:gravity="start"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginTop="5dp"
+                    tools:ignore="MissingConstraints"/>
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="start|center"
+                    android:layout_marginStart="15dp"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/ivProfilePicture"
+                    android:src="@drawable/icon_elect_fragment"/>
+            </FrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTabOfMessanges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTabOfMessangesGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        </LinearLayout>
+
+
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navView"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            app:headerLayout="@layout/nav_header"
+            android:layout_gravity="start"
+            android:backgroundTint="@color/floatingColorBackground"
+            app:menu="@menu/menu_main"/>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/floating_button_pencil"
+        android:backgroundTint="@color/floatingColorBackground"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

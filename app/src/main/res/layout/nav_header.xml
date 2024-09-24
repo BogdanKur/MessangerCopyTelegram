@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/imgBtnProfileDrawerLayoutMessageMain"
+        android:scaleType="centerCrop"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="15dp"
+        android:background="@android:color/transparent" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnUserNameAndNumber"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:textSize="13sp"
+            android:paddingStart="14dp"
+            android:textAllCaps="false"
+            android:gravity="start"
+            android:textColor="@color/black"
+            android:drawableRight="@drawable/icon_down"/>
+
+        <TextView
+            android:id="@+id/tvNumberUser"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:layout_marginTop="25dp"
+            android:background="@android:color/transparent"
+            android:gravity="start"
+            android:layout_marginStart="14dp"
+            tools:ignore="SmallSp" />
+
+    </FrameLayout>
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/btnUserNameAndNumberAddButton"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@android:color/transparent"
+        android:textSize="13sp"
+        android:paddingStart="14dp"
+        android:textAllCaps="false"
+        android:gravity="start|center"
+        android:textColor="@color/black"/>
+
+
+</LinearLayout>

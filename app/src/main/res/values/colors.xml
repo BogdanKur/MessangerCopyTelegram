@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="grafitnoCherni">#1d2633</color>
+    <color name="grafitnoGray">#252d3a</color>
+    <color name="startsTextColor">#808080</color>
+    <color name="aqua">#7fffd4</color>
+    <color name="floatingColorBackground">#51AEE7</color>
+    <color name="grayTextColor">#8996A3</color>
+    <color name="numbersCountryCode">#6DA3CB</color>
+    <color name="newGrafit">#141c27</color>
+    <color name="purpleMessage">#676DC1</color>
+</resources>

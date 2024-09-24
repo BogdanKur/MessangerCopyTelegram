@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/grafitnoCherni"
+    tools:context=".InviteFrensFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:background="@color/grafitnoGray"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        app:titleTextColor="@color/white"/>
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@android:color/transparent"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:gravity="start|center"
+        android:drawableLeft="@drawable/share_icon"
+        android:text="Пригласить в Telegram..."/>
+
+</LinearLayout>

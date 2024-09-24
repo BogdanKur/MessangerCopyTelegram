@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/grafitnoCherni"
+    tools:context=".NewMessageFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/grafitnoGray">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:id="@+id/toolbar"
+            app:titleTextColor="@color/white"
+            app:popupTheme="@color/white"
+            android:background="@color/grafitnoGray"/>
+
+        <Button
+            android:id="@+id/btnSearchContact"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center|end"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/icon_search_country_choose" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btnAddGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/createGroupDrawerMessageMain"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:gravity="start|center"
+        android:drawableLeft="@drawable/icon_create_group"
+        android:paddingStart="10dp"/>
+
+    <Button
+        android:id="@+id/btnNewContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/tvNewContact"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:gravity="start|center"
+        android:drawableLeft="@drawable/icon_invite_frens_gray"
+        android:paddingStart="10dp"/>
+
+    <Button
+        android:id="@+id/btnCreateChanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/createGroupDrawerMessageMain"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:gravity="start|center"
+        android:drawableLeft="@drawable/icon_add_account_gray"
+        android:paddingStart="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textColor="@color/startsTextColor"
+        android:gravity="center|start"
+        android:paddingStart="10dp"
+        android:text="@string/tvSortToTimeEnter"
+        android:background="@color/newGrafit"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListContacts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+</LinearLayout>

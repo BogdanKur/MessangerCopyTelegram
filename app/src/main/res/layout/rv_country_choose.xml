@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grafitnoCherni"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
+        <Button
+            android:id="@+id/btnCountryChooseRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:gravity="start|center"
+            android:paddingStart="45dp"
+            tools:ignore="RtlSymmetry" />
+        <TextView
+            android:id="@+id/tvCountryCodeRV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/numbersCountryCode"
+            android:layout_gravity="end|center"
+            android:paddingEnd="15dp"
+            tools:ignore="RtlSymmetry" />
+    </FrameLayout>
+
+
+</LinearLayout>

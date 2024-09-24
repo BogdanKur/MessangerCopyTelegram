@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startMenuAuthAndRegFragment">
+
+    <fragment
+        android:id="@+id/messageMainFragment"
+        tools:layout="@layout/fragment_message_main"
+        android:name="com.example.messanger.MessageMainFragment"
+        android:label="messageMain">
+        <action
+            android:id="@+id/action_messageMainFragment_to_newMessageFragment"
+            app:destination="@id/newMessageFragment"/>
+        <action
+            android:id="@+id/action_messageMainFragment_to_yourProfileFragment"
+            app:destination="@id/yourProfileFragment"/>
+        <action
+            android:id="@+id/action_messageMainFragment_to_chatUserFragment"
+            app:destination="@id/chatUserFragment"/>
+        <action
+            android:id="@+id/action_messageMainFragment_to_createGroupFragment"
+            app:destination="@id/createGroupFragment"/>
+        <action
+            android:id="@+id/action_messageMainFragment_to_groupChatUsersFragment"
+            app:destination="@id/groupChatUsersFragment"/>
+        <action
+            android:id="@+id/action_messageMainFragment_to_electsFragment"
+            app:destination="@id/electsFragment"/>
+        <action
+            android:id="@+id/action_messageMainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"/>
+        <action
+            android:id="@+id/action_messageMainFragment_to_inviteFrensFragment"
+            app:destination="@id/inviteFrensFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchMessageFragment"
+        tools:layout="@layout/fragment_search_messange"
+        android:name="com.example.messanger.SearchMessangeFragment"
+        android:label="searchMessage">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/startMenuAuthAndRegFragment"
+        tools:layout="@layout/fragment_start_menu_auth_and_reg"
+        android:name="com.example.messanger.StartMenuAuthAndRegFragment"
+        android:label="start menu auth and reg fragment">
+
+        <action
+            android:id="@+id/action_startMenuAuthAndRegFragment_to_authAndRegFragment"
+            app:destination="@id/AuthAndRegFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/AuthAndRegFragment"
+        tools:layout="@layout/fragment_auth_and_reg_menu"
+        android:name="com.example.messanger.AuthAndRegMenuFragment"
+        android:label="auth and reg">
+
+        <action
+            android:id="@+id/action_authAndRegFragment_to_countryChooseFromAuthAndRegFragment"
+            app:destination="@id/countryChooseFromAuthAndRegFragment"/>
+        <action
+            android:id="@+id/action_authAndRegFragment_to_messageMainFragment"
+            app:destination="@id/messageMainFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/countryChooseFromAuthAndRegFragment"
+        tools:layout="@layout/fragment_country_choose_from_auth_and_reg"
+        android:name="com.example.messanger.CountryChooseFromAuthAndRegFragment"
+        android:label="auth and reg">
+        <action
+            android:id="@+id/action_countryChooseFromAuthAndRegFragment_to_authAndRegFragment"
+            app:destination="@id/AuthAndRegFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/newMessageFragment"
+        tools:layout="@layout/fragment_new_message"
+        android:name="com.example.messanger.NewMessageFragment"
+        android:label="newMessage">
+        <action
+            android:id="@+id/action_newMessagefragment_to_chatUserFragment"
+            app:destination="@id/chatUserFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/yourProfileFragment"
+        android:label="profile"
+        android:name="com.example.messanger.YourProfileFragment"
+        tools:layout="@layout/fragment_your_profile">
+        <action
+            android:id="@+id/action_yourProfileFragment_to_messageMainFragment"
+            app:destination="@id/messageMainFragment"/>
+        <action
+            android:id="@+id/action_yourProfileFragment_to_editYourProfileFragment"
+            app:destination="@id/editYourProfileFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/editYourProfileFragment"
+        android:label="edit"
+        android:name="com.example.messanger.EditYourProfileFragment"
+        tools:layout="@layout/fragment_edit_your_profile">
+        <action
+            android:id="@+id/action_editYourProfileFragment_to_yourProfileFragment"
+            app:destination="@id/yourProfileFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatUserFragment"
+        android:label="chat"
+        tools:layout="@layout/fragment_chat_user"
+        android:name="com.example.messanger.ChatUserFragment">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/createGroupFragment"
+        tools:layout="@layout/fragment_create_group"
+        android:name="com.example.messanger.CreateGroupFragment">
+
+        <action
+            android:id="@+id/action_createGroupFragment_to_messageMainFragment"
+            app:destination="@id/messageMainFragment"/>
+        <action
+            android:id="@+id/action_createGroupFragment_to_createGroupSecondFragment"
+            app:destination="@id/createGroupSecondFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/createGroupSecondFragment"
+        tools:layout="@layout/fragment_create_group_second"
+        android:name="com.example.messanger.CreateGroupSecondFragment">
+
+        <action
+            android:id="@+id/action_createGroupSecondFragment_to_groupChatUsersfragment"
+            app:destination="@id/groupChatUsersFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/groupChatUsersFragment"
+        tools:layout="@layout/fragment_group_chat_users"
+        android:name="com.example.messanger.GroupChatUsersFragment">
+        <action
+            android:id="@+id/action_groupChatUsersFragment_to_messageMainFragment"
+            app:destination="@id/messageMainFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/electsFragment"
+        tools:layout="@layout/fragment_elects"
+        android:name="com.example.messanger.ElectsFragment">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        tools:layout="@layout/fragment_settings"
+        android:name="com.example.messanger.SettingsFragment">
+        <action
+            android:id="@+id/action_settingsFragment_to_settingsOfChatsFragment"
+            app:destination="@id/settingsOfChatsFragment"/>
+        <action
+            android:id="@+id/action_settingsFragment_to_foldersWithChatsFragment"
+            app:destination="@id/foldersWithChatsFragment"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/foldersWithChatsFragment"
+        tools:layout="@layout/fragment_folders_with_chats"
+        android:name="com.example.messanger.FoldersWithChatsFragment">
+        <action
+            android:id="@+id/action_foldersWithChatsFragment_to_newFolderFragment"
+            app:destination="@id/newFolderFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsOfChatsFragment"
+        tools:layout="@layout/fragment_settings_of_chats"
+        android:name="com.example.messanger.SettingsOfChatsFragment">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/newFolderFragment"
+        tools:layout="@layout/fragment_new_folder"
+        android:name="com.example.messanger.NewFolderFragment">
+        <action
+            android:id="@+id/action_newFolderFragment_to_chatFromFolderFragment"
+            app:destination="@id/chatFromFolderFragment"/>
+        <action
+            android:id="@+id/action_newFolderFragment_to_foldersWithChatsFragment"
+            app:destination="@id/foldersWithChatsFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/inviteFrensFragment"
+        tools:layout="@layout/fragment_invite_frens"
+        android:name="com.example.messanger.InviteFrensFragment">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatFromFolderFragment"
+        tools:layout="@layout/fragment_chat_from_folder"
+        android:name="com.example.messanger.ChatFromFolderFragment">
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_to_startMenuAuthAndRegFragment"
+        app:destination="@id/startMenuAuthAndRegFragment" />
+
+    <action
+        android:id="@+id/action_to_messageMainFragment"
+        app:destination="@id/messageMainFragment" />
+
+</navigation>

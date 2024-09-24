@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grafitnoCherni"
+    tools:context=".EditYourProfileFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/grafitnoGray"
+        android:id="@+id/toolbar">
+        <Button
+            android:id="@+id/btnSaveEdit"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="end"
+            android:background="@android:color/transparent"
+            android:drawableRight="@drawable/icon_confirm_update"
+            android:visibility="gone"/>
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tvYourNameEditProfile"
+        android:textSize="19sp"
+        android:textColor="@color/floatingColorBackground" />
+
+    <EditText
+        android:id="@+id/etNameEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:hint="@string/etHintName"
+        android:textColorHint="@color/startsTextColor"/>
+    <EditText
+        android:id="@+id/etSurnameEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:hint="@string/etHintSecondName"
+        android:textColorHint="@color/startsTextColor"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:background="@color/newGrafit"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tvAboutYourself"
+        android:textSize="19sp"
+        android:textColor="@color/floatingColorBackground" />
+
+    <EditText
+        android:id="@+id/etAboutYourSelvesEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:hint="Напишите что-нибудь о себе..."
+        android:textColorHint="@color/startsTextColor"/>
+
+</LinearLayout>

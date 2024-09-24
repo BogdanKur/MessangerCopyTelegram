@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/grafitnoCherni"
+    tools:context=".FoldersWithChatsFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:id="@+id/toolbar"
+        android:background="@color/grafitnoGray">
+        <Button
+            android:id="@+id/btnSaveNewFolder"
+            android:layout_width="127dp"
+            android:layout_height="35dp"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center|end"
+            android:layout_marginEnd="15dp"
+            android:text="@string/saveButtonTextNEWFOLDER"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="17sp"/>
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <ImageView
+        android:layout_width="370dp"
+        android:layout_height="120dp"
+        android:background="@android:color/transparent"
+        android:layout_gravity="center"
+        android:src="@drawable/new_folders_image"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:paddingStart="20dp"
+        android:id="@+id/etNameOfFolder"
+        android:background="@color/grafitnoGray"
+        android:textColor="@color/white"
+        android:textColorHint="@color/startsTextColor"
+        android:textSize="16sp"
+        android:hint="@string/etNameOfFolderHintText"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:background="@color/grafitnoGray">
+        <TextView
+            android:paddingStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ChooseChatsTextView"
+            android:textColor="@color/floatingColorBackground" />
+        <Button
+            android:paddingStart="20dp"
+            android:id="@+id/btnCreateNewFolder"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:textAllCaps="false"
+            android:gravity="center|start"
+            android:textColor="@color/floatingColorBackground"
+            android:text="@string/addChatsButtonText"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/grafitnoCherni"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:paddingStart="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rvChatsFolders"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+    </LinearLayout>
+
+</LinearLayout>
