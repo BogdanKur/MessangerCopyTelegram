@@ -43,4 +43,5 @@
     <string name="addChatsButtonText">Добавить чаты</string>
     <string name="SearchUsersAndGroupEditText">Поиск пользователей и групп</string>
     <string name="saveButtonTextNEWFOLDER">Сохранить</string>
+    <string name="SearchEditText">Поиск</string>
 </resources>

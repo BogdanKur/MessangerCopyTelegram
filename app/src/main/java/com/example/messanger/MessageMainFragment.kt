@@ -1,12 +1,10 @@
 package com.example.messanger
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -15,20 +13,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.GravityCompat
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
-import com.example.messanger.YourProfileFragment.Companion.aboutYourSelves
+import com.example.messanger.MessageAdapter.Companion.mediaPlayer
 import com.example.messanger.YourProfileFragment.Companion.currentUserId
-import com.example.messanger.YourProfileFragment.Companion.name
 import com.example.messanger.YourProfileFragment.Companion.phoneNumber
-import com.example.messanger.YourProfileFragment.Companion.surname
 import com.example.messanger.databinding.FragmentMessageMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -36,14 +28,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.getValue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlin.properties.Delegates
 
 
 class MessageMainFragment : Fragment(), TabsFoldersInterface {
@@ -84,6 +74,10 @@ class MessageMainFragment : Fragment(), TabsFoldersInterface {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         val actionBar = (activity as AppCompatActivity).supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(false)
+
+        binding.btnSearchMessage.setOnClickListener {
+            navController.navigate(R.id.action_messageMainFragment_to_searchMessageFragment)
+        }
 
         binding.btnRvTabOfMessangesOpenMessageELECT.setOnClickListener {
             val bundle = Bundle().apply {
@@ -131,6 +125,8 @@ class MessageMainFragment : Fragment(), TabsFoldersInterface {
                 else -> false
             }
         }
+
+
         binding.btnDrawerOpen.setOnClickListener {
             binding.drawer.openDrawer(GravityCompat.START)
         }
@@ -143,11 +139,13 @@ class MessageMainFragment : Fragment(), TabsFoldersInterface {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             Toast.makeText(requireContext(), "Нельзя вернуться назад с этого экрана", Toast.LENGTH_SHORT).show()
         }
-
         btnUserNameAndNumber = headerView.findViewById(R.id.btnUserNameAndNumber)
         tvUserNameAndNumber = headerView.findViewById(R.id.tvNumberUser)
         btnUserNameAndNumberAddButton = headerView.findViewById(R.id.btnUserNameAndNumberAddButton)
         imgBtnProfileDrawerLayoutMessageMain = headerView.findViewById(R.id.imgBtnProfileDrawerLayoutMessageMain)
+        imgBtnProfileDrawerLayoutMessageMain.setOnClickListener {
+            navController.navigate(R.id.action_messageMainFragment_to_settingsFragment)
+        }
         var drawableRight = 1
         btnUserNameAndNumber.setOnClickListener {
             if(drawableRight == 1) {
@@ -325,32 +323,66 @@ class MessageMainFragment : Fragment(), TabsFoldersInterface {
         val navController = findNavController()
         usrefs.child("user").child(currentUserId.toString()).child("folders").addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                newMessages.clear()
+                messageGroupList.clear()
                 for(snap in snapshot.children) {
-                    if(snap.child("name").value.toString() == string && snap.child("number").value.toString() != "null") {
-                        newMessages.clear()
-                        for(snap1 in snap.child("listsUser").children) {
-                            val nameOfUser = snap1.child("nameOfChat").value.toString()
-                            val imgAvaOfChatURL = snap1.child("imgAvaOfChatURL").value.toString()
-                            val numberOfUser = snap1.child("number").value.toString()
-                            val id = snap1.child("id").value.toString()
-                            newMessages.add(MessageTypeClass(nameOfUser, imgAvaOfChatURL, numberOfUser, id))
+                    if(snap.child("name").value.toString() == string) {
+                        if(snap.child("number").value.toString() != "null" ) {
+                            for(snap1 in snap.child("listsUser").children) {
+                                val nameOfUser = snap1.child("nameOfChat").value.toString()
+                                val imgAvaOfChatURL = snap1.child("imgAvaOfChatURL").value.toString()
+                                val numberOfUser = snap1.child("number").value.toString()
+                                val id = snap1.child("id").value.toString()
+                                newMessages.add(MessageTypeClass(nameOfUser, imgAvaOfChatURL, numberOfUser, id))
+                            }
+                        } else {
+                            for(snap1 in snap.child("listsUser").children) {
+                                val nameOfUser = snap1.child("nameOfChat").value.toString()
+                                val imgAvaOfChatURL = snap1.child("imgAvaOfChatURL").value.toString()
+                                messageGroupList.add(MessageTypeClassGroup(nameOfUser, imgAvaOfChatURL))
+                            }
                         }
-                    } else if(string == "Все" && snap.child("number").value.toString() != "null") {
-                        newMessages.clear()
+                    } else if(string == "Все") {
                         for(snap1 in snap.child("listsUser").children) {
-                            val nameOfUser = snap1.child("nameOfChat").value.toString()
-                            val imgAvaOfChatURL = snap1.child("imgAvaOfChatURL").value.toString()
-                            val numberOfUser = snap1.child("number").value.toString()
-                            val id = snap1.child("id").value.toString()
-                            newMessages.add(MessageTypeClass(nameOfUser, imgAvaOfChatURL, numberOfUser, id))
+                            if(snap1.child("number").value.toString() != "null") {
+                                Log.e("numbers", snap1.child("number").value.toString())
+                                Log.e("numbers1", snap1.child("nameOfChat").value.toString())
+                                val nameOfUser = snap1.child("nameOfChat").value.toString()
+                                val imgAvaOfChatURL = snap1.child("imgAvaOfChatURL").value.toString()
+                                val numberOfUser = snap1.child("number").value.toString()
+                                val id = snap1.child("id").value.toString()
+                                if(newMessages.size != 0) {
+                                    for(i in newMessages.indices) {
+                                        if((imgAvaOfChatURL != "" || nameOfUser != "") && (!newMessages[i].nameOfChat.contains(nameOfUser) || !newMessages[i].imgAvaOfChatURL.contains(imgAvaOfChatURL))) {
+                                            newMessages.add(MessageTypeClass(nameOfUser, imgAvaOfChatURL, numberOfUser, id))
+                                            Log.e("numbers6", newMessages.toString())
+                                        }
+                                    }
+                                } else {
+                                    newMessages.add(MessageTypeClass(nameOfUser, imgAvaOfChatURL, numberOfUser, id))
+                                    Log.e("numbers5", newMessages.toString())
+                                }
+                            } else {
+                                for(snap1 in snap.child("listsUser").children) {
+                                    Log.e("numbers2", snap1.child("number").value.toString())
+                                    Log.e("numbers3", snap1.child("nameOfChat").value.toString())
+                                    val nameOfUser = snap1.child("nameOfChat").value.toString()
+                                    val imgAvaOfChatURL = snap1.child("imgAvaOfChatURL").value.toString()
+                                    if(messageGroupList.size != 0) {
+                                        for(i in messageGroupList.indices) {
+                                            if((imgAvaOfChatURL != "" || nameOfUser != "") && (!messageGroupList[i].nameOfChat.contains(nameOfUser) || !messageGroupList[i].imgAvaOfChatURL.contains(imgAvaOfChatURL))) {
+                                                messageGroupList.add(MessageTypeClassGroup(nameOfUser, imgAvaOfChatURL))
+                                                Log.e("numbers8", messageGroupList.toString())
+                                            }
+                                        }
+                                    } else {
+                                        messageGroupList.add(MessageTypeClassGroup(nameOfUser, imgAvaOfChatURL))
+                                        Log.e("numbers7", messageGroupList.toString())
+                                    }
+                                }
+                            }
                         }
-                    } else if(snap.child("number").value.toString() == "null" ) {
-                        messageGroupList.clear()
-                        for(snap1 in snap.child("listsUser").children) {
-                            val nameOfUser = snap1.child("nameOfChat").value.toString()
-                            val imgAvaOfChatURL = snap1.child("imgAvaOfChatURL").value.toString()
-                            messageGroupList.add(MessageTypeClassGroup(nameOfUser, imgAvaOfChatURL))
-                        }
+
                     }
                 }
                 val adapter = TabOfMessangesAdapter(newMessages, navController, textSizeOfMessange!!)

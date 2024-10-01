@@ -35,6 +35,15 @@
                     android:layout_marginStart="10dp"
                     android:background="@android:color/transparent"
                     android:drawableLeft="@drawable/icon_drawer" />
+
+                <Button
+                    android:id="@+id/btnSearchMessage"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center|end"
+                    android:layout_marginEnd="10dp"
+                    android:background="@android:color/transparent"
+                    android:drawableLeft="@drawable/icon_search_country_choose" />
             </FrameLayout>
 
             <HorizontalScrollView
@@ -52,7 +61,6 @@
                 android:background="@drawable/rv_tabs_of_messages_drawable"
                 android:layout_width="match_parent"
                 android:layout_height="60dp">
-
                 <Button
                     android:text="Избранное"
                     android:id="@+id/btnRvTabOfMessangesOpenMessageELECT"
@@ -99,7 +107,8 @@
             android:layout_height="match_parent"
             app:headerLayout="@layout/nav_header"
             android:layout_gravity="start"
-            android:backgroundTint="@color/floatingColorBackground"
+            android:backgroundTint="@color/grafitnoCherni"
+            app:itemTextColor="@color/white"
             app:menu="@menu/menu_main"/>
 
     </androidx.drawerlayout.widget.DrawerLayout>

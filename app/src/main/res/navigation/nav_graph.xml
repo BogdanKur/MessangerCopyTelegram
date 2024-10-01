@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_messageMainFragment_to_inviteFrensFragment"
             app:destination="@id/inviteFrensFragment"/>
+        <action
+            android:id="@+id/action_messageMainFragment_to_searchMessageFragment"
+            app:destination="@id/searchMessageFragment"/>
     </fragment>
 
     <fragment
@@ -41,6 +44,13 @@
         tools:layout="@layout/fragment_search_messange"
         android:name="com.example.messanger.SearchMessangeFragment"
         android:label="searchMessage">
+
+        <action
+            android:id="@+id/action_searchMessageFragment_to_chatUserFragment"
+            app:destination="@id/chatUserFragment"/>
+        <action
+            android:id="@+id/action_searchMessageFragment_to_messageMainFragment"
+            app:destination="@id/messageMainFragment"/>
 
     </fragment>
 
@@ -90,6 +100,9 @@
         <action
             android:id="@+id/action_newMessagefragment_to_chatUserFragment"
             app:destination="@id/chatUserFragment"/>
+        <action
+            android:id="@+id/action_newMessageFragment_to_createGroupFragment"
+            app:destination="@id/createGroupFragment"/>
     </fragment>
 
     <fragment

@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grafitnoCherni"
+    android:orientation="vertical"
     tools:context=".SearchMessangeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/grafitnoGray"
+        android:layout_height="?android:actionBarSize">
+        <ImageButton
+            android:id="@+id/imgBtnBackToMessageMain"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="start"
+            android:src="@drawable/back_img_btn"
+            android:background="@android:color/transparent"/>
+        <EditText
+            android:id="@+id/etSearchUsers"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:textColorHint="@color/startsTextColor"
+            android:paddingStart="15dp"
+            android:hint="@string/SearchEditText"/>
 
-</FrameLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rvSearchesUsers"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+</LinearLayout>

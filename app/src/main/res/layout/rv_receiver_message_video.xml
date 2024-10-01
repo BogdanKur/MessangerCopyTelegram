@@ -1,45 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="end"
+    android:layout_gravity="start"
     android:background="@android:color/transparent"
     android:padding="8dp"
-    android:layout_marginBottom="4dp"
-    android:orientation="vertical">
-    <TextView
+    android:layout_marginBottom="4dp">
+    <Button
+        android:visibility="gone"
         android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rv_message_recieve_background"
+        android:background="@android:color/transparent"
         android:gravity="start|center"
-        android:layout_gravity="end"
+        android:layout_gravity="start"
         android:textColor="@color/white"
         android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:drawableLeft="@drawable/icon_play"/>
     <Button
         android:visibility="gone"
         android:id="@+id/tvMessage1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:gravity="start|center"
+        android:layout_gravity="start"
+        android:textColor="@color/white"
         android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
-        android:gravity="start|center"
-        android:layout_gravity="end"
-        android:background="@android:color/transparent"
-        android:drawableRight="@drawable/icon_play"/>
+        android:padding="10dp"
+        android:drawableLeft="@drawable/icon_play"/>
     <VideoView
-        android:visibility="gone"
-        android:id="@+id/tvMessage2"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
-        android:gravity="start|center"
-        android:layout_gravity="end"
-        android:background="@color/white"
-        android:backgroundTint="@android:color/transparent"/>
-</LinearLayout>
+        android:layout_gravity="start"
+        android:id="@+id/tvMessage2"/>
+</FrameLayout>

@@ -11,14 +11,37 @@
     android:orientation="vertical">
     <TextView
         android:id="@+id/tvMessage"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rv_message_background"
         android:gravity="start|center"
         android:layout_gravity="start"
         android:textColor="@color/white"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
         android:padding="10dp"/>
+    <Button
+        android:visibility="gone"
+        android:id="@+id/tvMessage1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:gravity="start|center"
+        android:layout_gravity="end"
+        android:background="@android:color/transparent"
+        android:drawableRight="@drawable/icon_play"/>
+    <VideoView
+        android:visibility="gone"
+        android:id="@+id/tvMessage2"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@color/white"
+        android:gravity="start|center"
+        android:layout_gravity="start"
+        android:textColor="@color/white"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:padding="10dp"
+        android:backgroundTint="@android:color/transparent"/>
 </LinearLayout>
