@@ -8,11 +8,12 @@
     android:orientation="vertical">
     <ImageButton
         android:id="@+id/imgBtnProfileDrawerLayoutMessageMain"
-        android:scaleType="centerCrop"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_margin="15dp"
-        android:background="@android:color/transparent" />
+        android:scaleType="centerCrop"
+        android:background="@drawable/rounded_image"
+        android:clipToOutline="true"/>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

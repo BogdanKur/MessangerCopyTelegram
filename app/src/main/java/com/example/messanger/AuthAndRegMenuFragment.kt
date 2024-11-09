@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.core.graphics.drawable.toDrawable
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.messanger.YourProfileFragment.Companion.currentUserId
 import com.example.messanger.databinding.FragmentAuthAndRegMenuBinding
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
@@ -106,6 +107,7 @@ class AuthAndRegMenuFragment : Fragment() {
                 user.orderByChild("number").equalTo(numb).addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
+                            Log.e("fuckYesNumber", numb)
                             sendVerificationCode()
                             val bottomShitAuthVerificationFragment = BottomShitAuthVerificationFragment()
                             bottomShitAuthVerificationFragment.show(parentFragmentManager, bottomShitAuthVerificationFragment.tag)
@@ -142,6 +144,7 @@ class AuthAndRegMenuFragment : Fragment() {
                         for (userSnapshot in snapshot.children) {
                             val userId = userSnapshot.key
                             numberOfAuthUser = userId!!
+                            currentUserId = numberOfAuthUser.toInt()
                             Log.e("numbv", numberOfAuthUser)
                             Log.e("User ID:", userId!!)
                         }

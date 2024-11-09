@@ -220,18 +220,20 @@ class MessageMainFragment : Fragment(), TabsFoldersInterface {
                                                         userReference.child(userId).child("textSize").get().addOnSuccessListener { snap->
                                                             textSizeOfMessange = snap.value.toString().toInt()
                                                         }
-                                                        val id = childes1.child("receiverId").value.toString()
+                                                        val id = childes.key.toString()
                                                         var names: String; var number: String; var image: String
                                                         userReference.child(id).get().addOnSuccessListener { query->
                                                             image = query.child("profilePicture").value.toString()
                                                             names = query.child("name").value.toString()
                                                             number = query.child("number").value.toString()
                                                             if(newMessages.size != 0) {
-                                                                for(i in newMessages.indices) {
-                                                                    if((image != "" || names != "") && (!newMessages[i].nameOfChat.contains(names) || !newMessages[i].imgAvaOfChatURL.contains(image))) {
-                                                                        newMessages.add(MessageTypeClass(names, image, number, id))
-                                                                        Log.e("wtf", newMessages.toString())
-                                                                    }
+                                                                val isDuplicate = newMessages.any {
+                                                                    it.nameOfChat == names && it.imgAvaOfChatURL == image
+                                                                }
+
+                                                                if (!isDuplicate) {
+                                                                    newMessages.add(MessageTypeClass(names, image, number, id))
+                                                                    Log.e("wtf", newMessages.toString())
                                                                 }
                                                             } else {
                                                                 newMessages.add(MessageTypeClass(names, image, number, id))
@@ -352,15 +354,16 @@ class MessageMainFragment : Fragment(), TabsFoldersInterface {
                                 val numberOfUser = snap1.child("number").value.toString()
                                 val id = snap1.child("id").value.toString()
                                 if(newMessages.size != 0) {
-                                    for(i in newMessages.indices) {
-                                        if((imgAvaOfChatURL != "" || nameOfUser != "") && (!newMessages[i].nameOfChat.contains(nameOfUser) || !newMessages[i].imgAvaOfChatURL.contains(imgAvaOfChatURL))) {
-                                            newMessages.add(MessageTypeClass(nameOfUser, imgAvaOfChatURL, numberOfUser, id))
-                                            Log.e("numbers6", newMessages.toString())
-                                        }
+                                    val isDuplicate = newMessages.any {
+                                        it.nameOfChat == nameOfUser && it.imgAvaOfChatURL == imgAvaOfChatURL
+                                    }
+
+                                    if (!isDuplicate) {
+                                        newMessages.add(MessageTypeClass(nameOfUser, imgAvaOfChatURL, numberOfUser, id))
+                                        Log.e("wtf", newMessages.toString())
                                     }
                                 } else {
                                     newMessages.add(MessageTypeClass(nameOfUser, imgAvaOfChatURL, numberOfUser, id))
-                                    Log.e("numbers5", newMessages.toString())
                                 }
                             } else {
                                 for(snap1 in snap.child("listsUser").children) {

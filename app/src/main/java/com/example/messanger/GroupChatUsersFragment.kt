@@ -74,7 +74,8 @@ class GroupChatUsersFragment : Fragment() {
         job = CoroutineScope(Dispatchers.Main).launch {
             while (isActive) {
                 listenForMessages(senderId){ messages ->
-                    binding.rvMessage.adapter = MessageGroupAdapter (senderId, messages, textSize!!)
+                    if(messages.isNotEmpty())
+                        binding.rvMessage.adapter = MessageGroupAdapter (senderId, messages, textSize!!)
                 }
                 delay(1000)
             }

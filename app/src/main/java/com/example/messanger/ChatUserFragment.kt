@@ -50,19 +50,17 @@ class ChatUserFragment : Fragment() {
     private lateinit var job: Job
     private var phoneNumber =""
     var chatTextSize: Int? = null
-    private var id = 0
+    companion object{
+        var ids = 0
+    }
     var imageUrl = ""
     var countHeight = 0
-
-   // private val REQUEST_VIDEO_CAPTURE = 1
-   // private lateinit var videoUri: Uri
 
     private lateinit var mediaPlayer: MediaPlayer
     private var mediaRecorder: MediaRecorder? = null
     private var audioFilePath: String? = null
-   // private val database = FirebaseDatabase.getInstance()
     private val storage = FirebaseStorage.getInstance()
-
+    private var messageList: List<Message> = listOf()
     @SuppressLint("SetTextI18n", "RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,13 +79,21 @@ class ChatUserFragment : Fragment() {
         binding.imgBtnEmodji.setOnClickListener {
             hideKeyboard(binding.etTextMessage)
             binding.frameLayout.visibility = View.VISIBLE
+            binding.imgBtnEmodjiClose.visibility = View.VISIBLE
+            binding.imgBtnEmodji.visibility = View.GONE
+        }
+        binding.imgBtnEmodjiClose.setOnClickListener {
+            binding.frameLayout.visibility = View.GONE
+            binding.imgBtnEmodjiClose.visibility = View.GONE
+            binding.imgBtnEmodji.visibility = View.VISIBLE
         }
         arguments?.let { bundle ->
             imageUrl = bundle.getString("IMAGE_URL").toString()
             val name = bundle.getString("NAMEOFUSER")
             phoneNumber = bundle.getString("NUMBER").toString()
             chatTextSize = bundle.getString("TEXTSIZE")?.toInt()
-            id = bundle.getString("ID")!!.toInt()
+            ids = bundle.getString("ID")!!.toInt()
+            Log.e("sd", ids.toString())
             Glide.with(binding.imgBtnProfilePicture.context)
                 .asBitmap()
                 .load(imageUrl)
@@ -96,40 +102,23 @@ class ChatUserFragment : Fragment() {
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            if(countHeight == 1) {
-                binding.frameLayout.visibility = View.GONE
-                binding.etTextMessage.clearFocus()
-                val params = binding.rootLayout.layoutParams
-                params.height = (params.height + convertDpToPx(370))
-                binding.rootLayout.layoutParams = params
-                binding.rootLayout.requestLayout()
-                countHeight = 0
-            }
+            binding.frameLayout.visibility = View.GONE
+            binding.etTextMessage.clearFocus()
         }
 
         binding.imgBtnSendMessage.setOnClickListener {
-            sendMessage(currentUserId.toString(), id.toString(), binding.etTextMessage.text.toString())
+            sendMessage(currentUserId.toString(), ids.toString(), binding.etTextMessage.text.toString())
             binding.etTextMessage.setText("")
             binding.etTextMessage.clearFocus()
             hideKeyboard(binding.etTextMessage)
             binding.imgBtnSendMessage.visibility = View.GONE
             binding.imgBtnRecordAudio.visibility = View.VISIBLE
 
-            listenForMessages(currentUserId.toString(), id.toString()){ messages ->
+            countHeight = 0
+            listenForMessages(currentUserId.toString(), ids.toString()){ messages ->
                 binding.rvMessage.adapter = MessageAdapter(currentUserId.toString(),messages, chatTextSize!!)
             }
-        }
 
-        binding.etTextMessage.setOnFocusChangeListener{ v, hasFocus ->
-            if(hasFocus) {
-                if(countHeight == 0) {
-                    val params = binding.rootLayout.layoutParams
-                    params.height = (params.height - convertDpToPx(370))
-                    binding.rootLayout.layoutParams = params
-                    binding.rootLayout.requestLayout()
-                    countHeight = 1
-                }
-            }
         }
 
         binding.imbBtnSmileFace.setOnClickListener {
@@ -175,62 +164,51 @@ class ChatUserFragment : Fragment() {
 
         job = CoroutineScope(Dispatchers.Main).launch {
            while (isActive) {
-                listenForMessages(currentUserId.toString(), id.toString()){ messages ->
-                   binding.rvMessage.adapter = MessageAdapter(currentUserId.toString(),messages, chatTextSize!!)
+                listenForMessages(currentUserId.toString(), ids.toString()){ messages ->
+                    if(messageList != messages) {
+                        messageList = messages
+                        if(chatTextSize != null) binding.rvMessage.adapter = MessageAdapter(currentUserId.toString(),messages, chatTextSize!!)
+                        else binding.rvMessage.adapter = MessageAdapter(currentUserId.toString(),messages, 16)
+                    }
+                    if(countHeight == 0) countHeight = 1
                 }
-               delay(10000)
+               if(countHeight == 1) {
+                   countHeight = 2
+                   binding.rvMessage.post{
+                       val lastPosition = messageList.size-1
+                       binding.rvMessage.scrollToPosition(lastPosition)
+                   }
+               }
+               if(binding.etTextMessage.text.toString() == "") {
+                   if(binding.imgBtnStopAudio.visibility == View.GONE) {
+                       binding.imgBtnSendMessage.visibility = View.GONE
+                       binding.imgBtnRecordAudio.visibility = View.VISIBLE
+                   } else {
+                       binding.imgBtnSendMessage.visibility = View.GONE
+                       binding.imgBtnRecordAudio.visibility = View.GONE
+                   }
+               }
+               delay(100)
             }
         }
 
+        binding.imgBtnVideoCallWithUser.setOnClickListener {
+            val action = ChatUserFragmentDirections.actionChatUserFragmentToCallFragment()
+            navController.navigate(action)
+        }
+        binding.imgBtncallWithUser.setOnClickListener {
+            navController.navigate(R.id.action_chatUserFragment_to_audioCallFragment)
+        }
 
         binding.imgBtnRecordAudio.setOnClickListener {
             binding.imgBtnRecordAudio.visibility = View.GONE
             binding.imgBtnSendMessage.visibility = View.GONE
             binding.imgBtnStopAudio.visibility = View.VISIBLE
             startRecording()
-
         }
 
-//        binding.imgBtnRecordVideo.setOnClickListener {
-//            binding.imgBtnRecordVideo.visibility = View.GONE
-//            binding.imgBtnSendMessage.visibility = View.GONE
-//            binding.imgBtnStopVideo.visibility = View.VISIBLE
-//            dispatchTakeVideoIntent()
-//        }
-//        binding.imgBtnStopVideo.setOnClickListener {
-//            uploadVideoToFirebase()
-//        }
         return view
     }
-
-//    private fun uploadVideoToFirebase() {
-//        val storage = FirebaseStorage.getInstance()
-//        val storageRef = storage.reference
-//        val videoRef = storageRef.child("videos/${UUID.randomUUID()}.mp4")
-//
-//        val uploadTask = videoRef.putFile(videoUri)
-//
-//        uploadTask.addOnSuccessListener {
-//            videoRef.downloadUrl.addOnSuccessListener { uri ->
-//                sendMessage(currentUserId.toString(), id.toString(), uri.toString())
-//            }
-//        }.addOnFailureListener {
-//        }
-//    }
-//
-//    private fun dispatchTakeVideoIntent() {
-//        Intent(MediaStore.ACTION_VIDEO_CAPTURE).also { takeVideoIntent ->
-//            startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE)
-//        }
-//    }
-//
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == Activity.RESULT_OK) {
-//            videoUri = data?.data!!
-//            uploadVideoToFirebase()
-//        }
-//    }
 
     private fun startRecording() {
         audioFilePath = "${requireActivity().externalCacheDir?.absolutePath}/${UUID.randomUUID()}.3gp"
@@ -265,7 +243,7 @@ class ChatUserFragment : Fragment() {
         storageRef.putFile(fileUri).addOnSuccessListener {
             storageRef.downloadUrl.addOnSuccessListener { uri ->
                 Log.e("STOOPsp", uri.toString())
-                sendMessage(currentUserId.toString(), id.toString(), uri.toString())
+                sendMessage(currentUserId.toString(), ids.toString(), uri.toString())
             }
         }.addOnFailureListener {
             Toast.makeText(requireContext(), "Upload failed", Toast.LENGTH_SHORT).show()
@@ -309,26 +287,6 @@ class ChatUserFragment : Fragment() {
         if (messageId != null) {
             database.child("user").child(senderId).child("messages").child(receiverId).child(messageId).setValue(message)
             database.child("user").child(receiverId).child("messages").child(senderId).child(messageId).setValue(message)
-        }
-    }
-
-    private fun playAudio() {
-        val storage = FirebaseStorage.getInstance()
-        val storageRef: StorageReference = storage.reference
-
-        val audioRef = storageRef.child("path_to_your_audio_file.mp3") // Укажите путь к вашему аудиофайлу в Firebase Storage
-
-        audioRef.downloadUrl.addOnSuccessListener { uri ->
-            mediaPlayer = MediaPlayer()
-            try {
-                mediaPlayer.setDataSource(uri.toString())
-                mediaPlayer.prepare()
-                mediaPlayer.start()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }.addOnFailureListener {
-            // Обработка ошибок
         }
     }
 

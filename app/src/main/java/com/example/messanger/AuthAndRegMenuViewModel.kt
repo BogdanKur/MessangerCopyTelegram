@@ -2,6 +2,7 @@ package com.example.messanger
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.messanger.YourProfileFragment.Companion.currentUserId
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -22,6 +23,7 @@ class AuthAndRegMenuViewModel: ViewModel() {
                 AuthAndRegMenuFragment.user.child((maxUserId+1).toString()).setValue(newUser)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            currentUserId = maxUserId+1
                             Log.d("Firebase", "User added successfully")
                         } else {
                             Log.w("Firebase", "Error adding user", task.exception)

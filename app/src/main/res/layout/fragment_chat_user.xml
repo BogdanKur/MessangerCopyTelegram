@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/grafitnoCherni"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/appBarLayout">
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?android:actionBarSize"
-            android:background="@color/grafitnoGray"
-            app:subtitleTextColor="@color/white">
-            <ImageButton
-                android:id="@+id/imgBtnProfilePicture"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:background="@android:color/transparent"
-                android:layout_marginStart="40dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="25sp"
-                android:id="@+id/tvName"/>
-        </com.google.android.material.appbar.MaterialToolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/grafitnoGray"
+        app:subtitleTextColor="@color/white">
+        <ImageButton
+            android:id="@+id/imgBtnProfilePicture"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/rounded_image"
+            android:scaleType="centerCrop"
+            android:layout_marginStart="40dp"
+            android:clipToOutline="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:id="@+id/tvName"/>
+        <ImageButton
+            android:id="@+id/imgBtncallWithUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/calls"/>
+        <ImageButton
+            android:id="@+id/imgBtnVideoCallWithUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_baseline_videocam_24"/>
+    </com.google.android.material.appbar.MaterialToolbar>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMessage"
         android:layout_width="match_parent"
-        android:layout_height="650dp"
-        android:id="@+id/rootLayout"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context=".ChatUserFragment">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -67,6 +68,14 @@
 
             <ImageButton
                 android:id="@+id/imgBtnEmodji"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="start|center"
+                android:background="@android:color/transparent"
+                android:src="@drawable/icon_choose_emogi"/>
+            <ImageButton
+                android:visibility="gone"
+                android:id="@+id/imgBtnEmodjiClose"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_gravity="start|center"
@@ -162,4 +171,4 @@
                 android:background="@android:color/transparent"/>
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

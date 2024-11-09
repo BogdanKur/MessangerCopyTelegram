@@ -16,8 +16,9 @@ firebaseAuthKtx = "23.0.0"
 firebaseBom = "33.2.0"
 firebaseUiAuth = "7.2.0"
 firebaseInappmessagingKtx = "21.0.0"
-navigationUiKtx = "2.8.0"
+navigationUiKtx = "2.8.3"
 firebaseCrashlyticsBuildtools = "3.0.2"
+identityJvm = "202408.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,6 +42,7 @@ firebase-storage-ktx = { module = "com.google.firebase:firebase-storage-ktx" }
 firebase-ui-auth = { module = "com.firebaseui:firebase-ui-auth", version.ref = "firebaseUiAuth" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
+identity-jvm = { group = "com.android.identity", name = "identity-jvm", version.ref = "identityJvm" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

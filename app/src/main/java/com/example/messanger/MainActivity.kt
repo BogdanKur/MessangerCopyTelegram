@@ -1,11 +1,13 @@
 package com.example.messanger
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.findNavController
@@ -27,12 +29,15 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.getValue
+import android.Manifest
+import androidx.core.app.ActivityCompat
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         val  databaseRef = FirebaseDatabase.getInstance().reference
@@ -49,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                             if (snapshot.exists()) {
                                 for (userSnapshot in snapshot.children) {
                                     currentUserId = userSnapshot.key!!.toInt()
+                                    Log.e("fdas12daasasasd", currentUserId.toString())
                                     name = userSnapshot.child("name").getValue<String?>().toString()
                                     surname = userSnapshot.child("surname").getValue<String?>().toString()
                                     aboutYourSelves = userSnapshot.child("aboutYourSelves").getValue<String?>().toString()
@@ -78,4 +84,17 @@ class MainActivity : AppCompatActivity() {
         return item.onNavDestinationSelected(navController)
                 || super.onOptionsItemSelected(item)
     }
+
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private val REQUIRED_PERMISSIONS = arrayOf(
+        Manifest.permission.CAMERA,
+        Manifest.permission.RECORD_AUDIO,
+        Manifest.permission.READ_PHONE_STATE
+    )
+
+    private val REQUEST_CODE_PERMISSIONS = 10
+
 }

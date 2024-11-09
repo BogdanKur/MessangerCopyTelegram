@@ -134,7 +134,12 @@
         android:label="chat"
         tools:layout="@layout/fragment_chat_user"
         android:name="com.example.messanger.ChatUserFragment">
-
+        <action
+            android:id="@+id/action_chatUserFragment_to_callFragment"
+            app:destination="@id/callFragment"/>
+        <action
+            android:id="@+id/action_chatUserFragment_to_audioCallFragment"
+            app:destination="@id/audioCallFragment"/>
     </fragment>
 
     <fragment
@@ -229,6 +234,24 @@
         tools:layout="@layout/fragment_chat_from_folder"
         android:name="com.example.messanger.ChatFromFolderFragment">
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/callFragment"
+        tools:layout="@layout/fragment_call"
+        android:name="com.example.messanger.CallFragment">
+        <action
+            android:id="@+id/action_callFragment_to_chatUserFragment"
+            app:destination="@id/chatUserFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/audioCallFragment"
+        tools:layout="@layout/fragment_audio_call"
+        android:name="com.example.messanger.AudioCallFragment">
+        <action
+            android:id="@+id/action_audioCallFragment_to_chatUserFragment"
+            app:destination="@id/chatUserFragment"/>
     </fragment>
 
     <action
